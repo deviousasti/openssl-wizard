@@ -1,0 +1,382 @@
+﻿<Window x:Class="openssl_wizard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:openssl_wizard"
+        mc:Ignorable="d"
+        Title="OpenSSL GUI" Height="450" Width="650" FontSize="13" FontFamily="Segoe UI"  ResizeMode="CanMinimize"
+        >
+    <Window.DataContext>
+        <local:Wizard/>
+    </Window.DataContext>
+    <Grid>
+        <TabControl x:Name="tabControl" Margin="0,0,0,50">
+            <TabItem Header="Home" DataContext="{Binding Home}">
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource Heading}">Workflows</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                        Listed are some of the ways to set up your chain of trust.
+                        </TextBlock>
+                        <Separator />
+                        <RichTextBox x:Name="HelpText" IsReadOnly="True" BorderThickness="0">                            
+                        </RichTextBox>                        
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="RSA Key" DataContext="{Binding RSAKeyGen}">
+                <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                    <TextBlock Style="{StaticResource Heading}">Generate an RSA Key Pair</TextBlock>
+                    <TextBlock Style="{StaticResource Body}">
+                        Before you can obtain an X.509 certificate, you will need to generate an RSA key pair. 
+                        <LineBreak />
+                        This will allow you to securely communicate with a certificate authority (CA) to establish your identity.
+                    </TextBlock>
+                    <Separator />
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Name</Label>
+                        <TextBox Text="{Binding KeyName}"/>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Passphrase</Label>
+                        <TextBox Text="{Binding Passphrase}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Key Length</Label>
+                        <ComboBox SelectedValue="{Binding KeySize}" SelectedIndex="2" ItemsSource="{Binding KeySizes}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Key Encyption</Label>
+                        <ComboBox SelectedValue="{Binding KeyEncyption}" SelectedIndex="2" ItemsSource="{Binding Algorithms}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="ECDSA Key" DataContext="{Binding ECDSAKeyGen}">
+                <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                    <TextBlock Style="{StaticResource Heading}">Generate an ECDSA Key Pair</TextBlock>
+                    <TextBlock Style="{StaticResource Body}">
+                        Before you can obtain an X.509 certificate, you will need to generate an RSA or ECDSA key pair. 
+                        <LineBreak />
+                        Elliptic curve cryptography is able to provide the same level of security level as RSA with a smaller key size.
+                    </TextBlock>
+                    <Separator />
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Name</Label>
+                        <TextBox Text="{Binding KeyName}"/>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Passphrase</Label>
+                        <TextBox Text="{Binding Passphrase}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource Row}">
+                        <Label>Elliptic Curve</Label>
+                        <ComboBox SelectedValue="{Binding EllipticCurve}" SelectedIndex="2" ItemsSource="{Binding EllipticCurves}">
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>         
+            <TabItem Header="Root CA" DataContext="{Binding RootCertGen}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Create a Root CA</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                        Create Your Own SSL Root Certificate Authority to further sign client certificates.
+                        <LineBreak />                          
+                        This will create a new private key and its corresponding public key.
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Name</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Passphrase</Label>
+                            <TextBox Text="{Binding Passphrase}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Key Length</Label>
+                            <ComboBox SelectedValue="{Binding KeySize}" SelectedIndex="2" ItemsSource="{Binding KeySizes}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Digest</Label>
+                            <ComboBox SelectedItem="{Binding Digest}" ToolTip="The message digest to sign the request with" ItemsSource="{Binding Digests}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Validity</Label>
+                            <TextBox Text="{Binding Validity}" ToolTip="Validity of the certificate in days"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Subject</Label>
+                            <TextBox Text="{Binding Subject}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Extensions</Label>
+                            <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Self-Sign CA" DataContext="{Binding SelfSignedCertGen}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Self-Sign a Root Certificate</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                        Create Your Own SSL Certificate Authority from an existing key to further sign client certificates.                                                
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Input Key</Label>
+                            <TextBox Text="{Binding InputKey}" ToolTip="This is the filename of the input key"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Key Passphrase</Label>
+                            <TextBox Text="{Binding InputPassphrase}" ToolTip="This is the passphrase for the input key"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Name</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Out Passphrase</Label>
+                            <TextBox Text="{Binding OutputPassphrase}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Digest</Label>
+                            <ComboBox SelectedItem="{Binding Digest}" ToolTip="The message digest to sign the request with" ItemsSource="{Binding Digests}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Validity</Label>
+                            <TextBox Text="{Binding Validity}" ToolTip="Validity of the certificate in days"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Subject</Label>
+                            <TextBox Text="{Binding Subject}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Extensions</Label>
+                            <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Issue CSR" DataContext="{Binding CsrGen}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Issue a Certificate Signing Request</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                            Create a CSR from an existing key.
+                            <LineBreak />
+                            A Certificate Signing Request (CSR) is a specially formatted 
+                            public key that is used for enrollment of an SSL Certificate.                         
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Input Key</Label>
+                            <TextBox Text="{Binding InputKey}" ToolTip="This is the filename of the input key"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Key Passphrase</Label>
+                            <TextBox Text="{Binding InputPassphrase}" ToolTip="This is the passphrase for the input key"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Name</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Out Passphrase</Label>
+                            <TextBox Text="{Binding OutputPassphrase}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Digest</Label>
+                            <ComboBox SelectedItem="{Binding Digest}" ToolTip="The message digest to sign the request with" ItemsSource="{Binding Digests}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Subject</Label>
+                            <TextBox Text="{Binding Subject}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Extensions</Label>
+                            <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem> 
+            <TabItem Header="New CSR" DataContext="{Binding CsrGenNew}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Create a Key &amp; Signing Request</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                            Create a CSR from an newly generated key.
+                            <LineBreak />
+                            A Certificate Signing Request (CSR) is a specially formatted 
+                            public key that is used for enrollment of an SSL Certificate.
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Name</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Passphrase</Label>
+                            <TextBox Text="{Binding OutputPassphrase}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Key Length</Label>
+                            <ComboBox SelectedValue="{Binding KeySize}" SelectedIndex="2" ItemsSource="{Binding KeySizes}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Digest</Label>
+                            <ComboBox SelectedItem="{Binding Digest}" ToolTip="The message digest to sign the request with" ItemsSource="{Binding Digests}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Subject</Label>
+                            <TextBox Text="{Binding Subject}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Extensions</Label>
+                            <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Sign" DataContext="{Binding SignCert}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Sign a Certificate</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                            Sign a certificate with your key and the signing request (CSR).
+                            <LineBreak />
+                            You'll need a CSR and the CA's certificate and key.
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Name</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>CSR</Label>
+                            <TextBox Text="{Binding InputCsr}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Validity</Label>
+                            <TextBox Text="{Binding Validity}" ToolTip="Validity of the certificate in days"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>CA Certificate</Label>
+                            <TextBox Text="{Binding CertificateForCA}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>CA Certificate</Label>
+                            <TextBox Text="{Binding KeyForCA}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>CA Passphrase</Label>
+                            <TextBox Text="{Binding InputPassphrase}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Extensions</Label>
+                            <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
+                        </StackPanel>                        
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+
+            <TabItem Header="Convert" DataContext="{Binding ConvertCert}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Convert</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                            Change a certificate or keys' encoding from one format to another.
+                            <LineBreak />  
+                            PEM is a base64 encoding with header and footer lines.
+                            DER is a binary encoding.
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>From</Label>
+                            <TextBox Text="{Binding InCertificate}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>From Format</Label>
+                            <ComboBox SelectedValue="{Binding InFormat}" ItemsSource="{Binding InFormats}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>To</Label>
+                            <TextBox Text="{Binding OutCertificate}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>To Format</Label>
+                            <ComboBox SelectedValue="{Binding OutFormat}" ItemsSource="{Binding OutFormats}">
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Combine" DataContext="{Binding CombineCert}">
+                <ScrollViewer>
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Combine</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">
+                            Combine a private key and a public key into a single file.
+                                                        
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Public Key</Label>
+                            <TextBox Text="{Binding InputCertificate}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Private Key</Label>
+                            <TextBox Text="{Binding InputKey}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label Content="Old Passphrase"/>
+                            <TextBox Text="{Binding InputPassphrase}"/>
+                        </StackPanel>                        
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Combine Into</Label>
+                            <TextBox Text="{Binding KeyName}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Format</Label>
+                            <ComboBox SelectedValue="{Binding OutFormat}" ItemsSource="{Binding OutFormats}">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>New Passphrase *</Label>
+                            <TextBox Text="{Binding OutputPassphrase}"/>
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource Body}" FontSize="12" Margin="10">
+                            <Bold>Warning: </Bold>
+                            <Run>
+                                Even though lack of a passphrase means                                 
+                                "don't encrypt private key" - in a PKCS#12 file, 
+                                the certificates are encrypted as well, so even with -nodes you'd need an export password.
+                            </Run>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+
+
+        </TabControl>
+        <StackPanel Style="{StaticResource Buttons}" DataContext="{Binding SelectedItem.DataContext, ElementName=tabControl}">
+            <Button Command="{Binding GenerateCommand}" Content="{Binding GenerateDescription}" Width="150" />
+            <Button Command="{Binding CopyCommand}" Content="⎘" Margin="-6,5,5,5" ToolTip="Copy command to clipboard" />
+            <Button Command="{Binding ExportCommand}" Content="Export"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
