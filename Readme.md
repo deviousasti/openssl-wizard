@@ -2,7 +2,7 @@
 
 A simple GUI to help you with common certificate related tasks.
 
-<img src="https://user-images.githubusercontent.com/2375486/74975484-1f25b000-544d-11ea-8f72-337e063bceda.png" alt="image" style="zoom:90%;" />
+![image](https://user-images.githubusercontent.com/2375486/74975484-1f25b000-544d-11ea-8f72-337e063bceda.png)
 
 ## Get it
 
