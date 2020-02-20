@@ -53,6 +53,13 @@ namespace openssl_wizard
 
         public void ShowExport()
         {
+
+            if (!File.Exists(Configuration.OutputFile))
+            {
+                MessageBox.Show("The output file has not generated yet", "Export", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var filter = $"*{Path.GetExtension(Configuration.OutputFile)}";
             var dialog = new Microsoft.Win32.SaveFileDialog
             {
@@ -63,12 +70,6 @@ namespace openssl_wizard
             var result = dialog.ShowDialog(App.Current.MainWindow).GetValueOrDefault(false);
             if (!result)
                 return;
-
-            if (!File.Exists(Configuration.OutputFile))
-            {
-                MessageBox.Show("Output file not generated yet", "Export", MessageBoxButton.OK);
-                return;
-            }
 
             try
             {
