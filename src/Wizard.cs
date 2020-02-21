@@ -1,4 +1,5 @@
 ﻿using OpenSSL;
+using System.Collections.Generic;
 
 namespace openssl_wizard
 {
@@ -13,15 +14,35 @@ namespace openssl_wizard
         public PageViewModel<SelfSignedCert> SelfSignedCertGen { get; } = new PageViewModel<SelfSignedCert>();
 
         public PageViewModel<CreateRootCert> RootCertGen { get; } = new PageViewModel<CreateRootCert>();
-        
+
         public PageViewModel<CertificateSignRequest> CsrGen { get; } = new PageViewModel<CertificateSignRequest>();
-        
+
         public PageViewModel<CertificateSignRequestNewKey> CsrGenNew { get; } = new PageViewModel<CertificateSignRequestNewKey>();
-        
+
         public PageViewModel<SignCertificate> SignCert { get; } = new PageViewModel<SignCertificate>();
-        
+
         public PageViewModel<ConvertCertificate> ConvertCert { get; } = new PageViewModel<ConvertCertificate>();
-        
+
         public PageViewModel<CombineCertificate> CombineCert { get; } = new PageViewModel<CombineCertificate>();
+
+        protected IDictionary<string, object> Pages => new Dictionary<string, object>
+        {
+            {"home", Home },
+            {"create_rsa", RSAKeyGen },
+            {"create_ecdsa", ECDSAKeyGen },
+            {"root_ca", RootCertGen },
+            {"self_sign", SelfSignedCertGen },
+            {"create_csr", CsrGen },
+            {"create_csr_key", CsrGenNew },
+            {"sign", SignCert },
+            {"convert", ConvertCert },
+            {"combine", CombineCert },
+        };
+
+        public object GetPageFor(string key)
+        {
+            Pages.TryGetValue(key, out object value);
+            return value;
+        }
     }
 }

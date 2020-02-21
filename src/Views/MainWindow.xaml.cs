@@ -30,8 +30,25 @@ namespace openssl_wizard
             {
                 reader.Position = 0;
                 HelpText.SelectAll();
-                HelpText.Selection.Load(reader, DataFormats.Rtf);                
+                HelpText.Selection.Load(reader, DataFormats.Rtf);
             }
         }
+
+
+        private void Hyperlink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Hyperlink link)
+            {
+                var path = link.NavigateUri.OriginalString;
+                var page = (DataContext as Wizard)?.GetPageFor(path);
+                var matching = tabControl.Items.OfType<TabItem>().FirstOrDefault(tab => tab.DataContext == page);
+                if (matching != null)
+                {
+                    tabControl.SelectedItem = matching;
+                }
+            }
+        }
+
+
     }
 }

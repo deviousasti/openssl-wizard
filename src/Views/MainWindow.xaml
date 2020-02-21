@@ -13,16 +13,17 @@
     <Grid>
         <TabControl x:Name="tabControl" Margin="0,0,0,50">
             <TabItem Header="Home" DataContext="{Binding Home}">
-                <ScrollViewer>
-                    <StackPanel Margin="10">
-                        <TextBlock Style="{StaticResource Heading}">Workflows</TextBlock>
-                        <TextBlock Style="{StaticResource Body}">
-                        Listed are some of the ways to set up your chain of trust.
-                        </TextBlock>
-                        <Separator />
-                        <RichTextBox x:Name="HelpText" IsReadOnly="True" BorderThickness="0">                            
-                        </RichTextBox>                        
-                    </StackPanel>
+                <ScrollViewer Margin="10,0,0,0">
+                    <RichTextBox x:Name="HelpText" IsReadOnly="True" IsDocumentEnabled="False"  BorderThickness="0" MinHeight="200">
+                        <RichTextBox.Resources>
+                            <Style TargetType="Hyperlink">
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Foreground" Value="DarkCyan" />
+                                <Setter Property="TextDecorations" Value="None" />
+                                <EventSetter Event="MouseDown" Handler="Hyperlink_MouseDown" />
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="RSA Key" DataContext="{Binding RSAKeyGen}">
@@ -76,7 +77,7 @@
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>
-            </TabItem>         
+            </TabItem>
             <TabItem Header="Root CA" DataContext="{Binding RootCertGen}">
                 <ScrollViewer>
                     <StackPanel Margin="10" DataContext="{Binding Configuration}">
@@ -125,7 +126,7 @@
                     <StackPanel Margin="10" DataContext="{Binding Configuration}">
                         <TextBlock Style="{StaticResource Heading}">Self-Sign a Root Certificate</TextBlock>
                         <TextBlock Style="{StaticResource Body}">
-                        Create Your Own SSL Certificate Authority from an existing key to further sign client certificates.                                                
+                        Create Your Own SSL Certificate Authority from an existing key to further sign client certificates.
                         </TextBlock>
                         <Separator />
                         <StackPanel Style="{StaticResource Row}">
@@ -172,7 +173,7 @@
                             Create a CSR from an existing key.
                             <LineBreak />
                             A Certificate Signing Request (CSR) is a specially formatted 
-                            public key that is used for enrollment of an SSL Certificate.                         
+                            public key that is used for enrollment of an SSL Certificate.
                         </TextBlock>
                         <Separator />
                         <StackPanel Style="{StaticResource Row}">
@@ -206,7 +207,7 @@
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem> 
+            </TabItem>
             <TabItem Header="New CSR" DataContext="{Binding CsrGenNew}">
                 <ScrollViewer>
                     <StackPanel Margin="10" DataContext="{Binding Configuration}">
@@ -285,7 +286,7 @@
                         <StackPanel Style="{StaticResource Row}">
                             <Label>Extensions</Label>
                             <TextBox Text="{Binding Extensions}" Height="100" Style="{DynamicResource Multiline}"></TextBox>
-                        </StackPanel>                        
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -330,7 +331,7 @@
                         <TextBlock Style="{StaticResource Heading}">Combine</TextBlock>
                         <TextBlock Style="{StaticResource Body}">
                             Combine a private key and a public key into a single file.
-                                                        
+
                         </TextBlock>
                         <Separator />
                         <StackPanel Style="{StaticResource Row}">
@@ -344,7 +345,7 @@
                         <StackPanel Style="{StaticResource Row}">
                             <Label Content="Old Passphrase"/>
                             <TextBox Text="{Binding InputPassphrase}"/>
-                        </StackPanel>                        
+                        </StackPanel>
                         <StackPanel Style="{StaticResource Row}">
                             <Label>Combine Into</Label>
                             <TextBox Text="{Binding KeyName}"/>
