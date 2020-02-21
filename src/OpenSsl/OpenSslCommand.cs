@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -61,17 +62,29 @@ namespace OpenSSL
 
             var builder = new StringBuilder();
             var tcs = new TaskCompletionSource<Result>();
-            var process = Process.Start(startInfo);
+            try
+            {
+                var process = Process.Start(startInfo);
 
-            void onExit() => tcs.TrySetResult(new Result(builder.ToString().Replace("+", ""), process.ExitCode));
-            void onData(object s, DataReceivedEventArgs e) { if (e.Data == null) onExit(); else builder.Append(e.Data); }
+                void onExit() => tcs.TrySetResult(new Result(builder.ToString().Replace("+", ""), process.ExitCode));
+                void onData(object s, DataReceivedEventArgs e) { if (e.Data == null) onExit(); else builder.Append(e.Data); }
 
-            process.Exited += (s, e) => onExit();
-            process.ErrorDataReceived += onData;
-            process.OutputDataReceived += onData;
+                process.Exited += (s, e) => onExit();
+                process.ErrorDataReceived += onData;
+                process.OutputDataReceived += onData;
 
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+            }
+            catch (Win32Exception)
+            {
+                tcs.SetResult(new Result("Please verify that OpenSSL is in present in the path.", -1));
+            }
+            catch (Exception ex)
+            {
+                tcs.SetResult(new Result(ex.Message, -1));
+            }
+
             return tcs.Task;
         }
 
