@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("openssl-wizard")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple GUI to help you with common certificate related tasks.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("asti")]
 [assembly: AssemblyProduct("openssl-wizard")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
