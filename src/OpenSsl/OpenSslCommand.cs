@@ -78,7 +78,7 @@ namespace OpenSSL
             }
             catch (Win32Exception)
             {
-                tcs.SetResult(new Result("Please verify that OpenSSL is in present in the path.", -1));
+                tcs.SetResult(new Result("Please verify that OpenSSL is present in the path, and is a valid executable.", -1));
             }
             catch (Exception ex)
             {
