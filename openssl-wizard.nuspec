@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>openssl-wizard</id>
+    <version>1.1</version>
+    <packageSourceUrl>https://github.com/deviousasti/openssl-wizard/</packageSourceUrl>    
+    <owners>asti</owners>
+    <title>OpenSSL Wizard</title>
+    <authors>asti</authors>    
+    <projectUrl>https://github.com/deviousasti/openssl-wizard</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/deviousasti/openssl-wizard/master/icon.png</iconUrl>
+     <copyright>2020</copyright>     
+    <projectSourceUrl>https://github.com/deviousasti/openssl-wizard</projectSourceUrl>
+    <tags>openssl gui certificate sign</tags>
+    <summary>
+      A simple GUI to help you with common certificate related tasks
+    </summary>
+    <description>
+      The openssl program is a command line tool for using the various cryptography functions of OpenSSL's crypto library from the shell.
+      OpenSSL Wizard is a small gui layer on top of the openssl cli, which allows you to:
+      * Generate an RSA key
+      * Generate an Elliptic Curve DSA key
+      * Generate a new Root Certificate Authority
+      * Generate a Root Certificate Authority by signing an existing private key
+      * Generate a Certificate Signing Request (CSR) for an existing private key
+      * Generate a new private key and a Certificate Signing Request (CSR) for it
+      * Sign a CSR with your private key
+      * Convert certificates from various container formats to one another
+      * Combine a private key and a public key into a single container
+    </description>
+    <dependencies>
+      <dependency id="openssl" version=" 1.1.1" />
+    </dependencies>    
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="src\bin\Debug\openssl-wizard.exe" target="bin" />
+  </files>
+</package>

@@ -1,0 +1,15 @@
+
+Source: https://github.com/deviousasti/openssl-wizard
+Author: asti 
+Maintainer: asti 
+
+
+VERIFICATION
+------------
+
+openssl-wizard.exe in the package is from:
+https://github.com/deviousasti/openssl-wizard/releases/download/v1.1/openssl-wizard.exe
+
+To verify, use:
+Invoke-WebRequest https://github.com/deviousasti/openssl-wizard/releases/download/v1.1/openssl-wizard.exe -OutFile .\openssl-wizard.temp
+${Get-FileHash .\openssl-wizard.temp} -eq ${Get-FileHash .\openssl-wizard.exe }
