@@ -29,8 +29,8 @@ namespace openssl_wizard
             using (var reader = new MemoryStream(documentBytes))
             {
                 reader.Position = 0;
-                HelpText.SelectAll();
                 HelpText.Selection.Load(reader, DataFormats.Rtf);
+                HelpText.Selection.Select(HelpText.Selection.Start, HelpText.Selection.Start);
             }
         }
 
