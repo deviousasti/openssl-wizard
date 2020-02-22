@@ -2,13 +2,13 @@
 
 A simple GUI to help you with common certificate related tasks.
 
-![image](https://user-images.githubusercontent.com/2375486/74975484-1f25b000-544d-11ea-8f72-337e063bceda.png)
+![image](https://user-images.githubusercontent.com/2375486/75088352-07941780-5572-11ea-9ac5-a078a2faf6a7.png)
 
 ## Get it
 
 Download a copy from the the Releases section. 
 
-You will need to have `openssl.exe` present in the `PATH` of your system. If you're not sure how, you can always put `openssl-wizard` in the same folder as `openssl`.
+You will need to have `openssl.exe` present in the `PATH` of your system. If you're not sure how, you can always put `openssl-wizard` in the same folder as `openssl.exe`. If you don't need to run `openssl`, you can still click the copy button to copy the `openssl` command to the clipboard.
 
 ## Sections
 
