@@ -20,6 +20,8 @@ namespace openssl_wizard
 
         public RelayCommand CopyCommand { get; }
 
+        public bool HasOutput => !String.IsNullOrEmpty(Configuration.OutputFile);
+
         public string GenerateDescription => Configuration?.Description;
 
         public PageViewModel()
@@ -56,7 +58,7 @@ namespace openssl_wizard
 
             if (!File.Exists(Configuration.OutputFile))
             {
-                MessageBox.Show("The output file has not generated yet", "Export", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The output file has not been generated yet.", "Export", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

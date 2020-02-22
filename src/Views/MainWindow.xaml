@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="OpenSSL GUI" Height="450" Width="650" FontSize="13" FontFamily="Segoe UI"  ResizeMode="CanMinimize"
         >
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <local:Wizard/>
     </Window.DataContext>
@@ -377,7 +380,7 @@
         <StackPanel Style="{StaticResource Buttons}" DataContext="{Binding SelectedItem.DataContext, ElementName=tabControl}">
             <Button Command="{Binding GenerateCommand}" Content="{Binding GenerateDescription}" Width="150" />
             <Button Command="{Binding CopyCommand}" Content="⎘" Margin="-6,5,5,5" ToolTip="Copy command to clipboard" />
-            <Button Command="{Binding ExportCommand}" Content="Export"></Button>
+            <Button Command="{Binding ExportCommand}" Content="Export" Visibility="{Binding HasOutput, Converter={StaticResource BooleanToVisibilityConverter}}"></Button>
         </StackPanel>
     </Grid>
 </Window>
