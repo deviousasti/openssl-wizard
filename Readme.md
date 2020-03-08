@@ -6,7 +6,11 @@ A simple GUI to help you with common certificate related tasks.
 
 ## Get it
 
-Download a copy from the the Releases section. 
+If you have Chocolatey, the easiest way to install it is:
+
+	choco install openssl-wizard
+
+Or you can download a copy from the the Releases section. 
 
 You will need to have `openssl.exe` present in the `PATH` of your system. If you're not sure how, you can always put `openssl-wizard` in the same folder as `openssl.exe`. If you don't need to run `openssl`, you can still click the copy button to copy the `openssl` command to the clipboard.
 

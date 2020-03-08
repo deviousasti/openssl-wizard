@@ -8,8 +8,7 @@
     <title>OpenSSL Wizard</title>
     <authors>asti</authors>    
     <projectUrl>https://github.com/deviousasti/openssl-wizard</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/deviousasti/openssl-wizard/master/icon.png</iconUrl>
-     <copyright>2020</copyright>     
+    <iconUrl>https://raw.githubusercontent.com/deviousasti/openssl-wizard/master/icon.png</iconUrl> 
     <projectSourceUrl>https://github.com/deviousasti/openssl-wizard</projectSourceUrl>
     <tags>openssl gui certificate sign</tags>
     <summary>
