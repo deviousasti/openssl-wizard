@@ -64,6 +64,7 @@
     <Compile Include="OpenSsl\ConvertCertificate.cs" />
     <Compile Include="OpenSsl\CreateRootCert.cs" />
     <Compile Include="OpenSsl\ECDSAKey.cs" />
+    <Compile Include="OpenSsl\GenerateCode.cs" />
     <Compile Include="OpenSsl\OpenSslCommand.cs" />
     <Compile Include="OpenSsl\OpenSslVersion.cs" />
     <Compile Include="OpenSsl\SelfSignedCert.cs" />

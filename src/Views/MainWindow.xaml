@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:openssl_wizard"
         mc:Ignorable="d"
-        Title="OpenSSL GUI" Height="450" Width="650" FontSize="13" FontFamily="Segoe UI"  ResizeMode="CanMinimize"
+        Title="OpenSSL GUI" Height="450" Width="680" FontSize="13" FontFamily="Segoe UI"  ResizeMode="CanMinimize"
         >
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -279,7 +279,7 @@
                             <TextBox Text="{Binding CertificateForCA}"></TextBox>
                         </StackPanel>
                         <StackPanel Style="{StaticResource Row}">
-                            <Label>CA Certificate</Label>
+                            <Label>CA Key</Label>
                             <TextBox Text="{Binding KeyForCA}"></TextBox>
                         </StackPanel>
                         <StackPanel Style="{StaticResource Row}">
@@ -374,6 +374,27 @@
                 </ScrollViewer>
             </TabItem>
 
+            <TabItem Header="Code" DataContext="{Binding GenerateCode}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Margin="10" DataContext="{Binding Configuration}">
+                        <TextBlock Style="{StaticResource Heading}">Generate Code</TextBlock>
+                        <TextBlock Style="{StaticResource Body}">                            
+                            Generate C/C++ code for PEM encoded certificates
+                        </TextBlock>
+                        <Separator />
+                        <StackPanel Style="{StaticResource Row}">
+                            <Label>Key / Certificate</Label>
+                            <TextBox Text="{Binding InputCertificate}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource Row}"> 
+                            <Label>Generated</Label>
+                            <TextBox Height="160" Width="500" VerticalContentAlignment="Top" Text="{Binding OutputText}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" FontFamily="Consolas">
+                                
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
 
 
         </TabControl>

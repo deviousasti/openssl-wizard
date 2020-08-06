@@ -24,6 +24,8 @@ namespace openssl_wizard
         public PageViewModel<ConvertCertificate> ConvertCert { get; } = new PageViewModel<ConvertCertificate>();
 
         public PageViewModel<CombineCertificate> CombineCert { get; } = new PageViewModel<CombineCertificate>();
+        
+        public PageViewModel<GenerateCode> GenerateCode { get; } = new PageViewModel<GenerateCode>();
 
         protected IDictionary<string, object> Pages => new Dictionary<string, object>
         {
@@ -37,6 +39,7 @@ namespace openssl_wizard
             {"sign", SignCert },
             {"convert", ConvertCert },
             {"combine", CombineCert },
+            {"generate", GenerateCode },
         };
 
         public object GetPageFor(string key)
