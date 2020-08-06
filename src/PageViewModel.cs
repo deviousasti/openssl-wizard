@@ -33,7 +33,7 @@ namespace openssl_wizard
 
         public void CopyToClipboard()
         {
-            Clipboard.SetText($"openssl {Configuration.Arguments}");
+            Clipboard.SetText(Configuration.CommandLine);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

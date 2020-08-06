@@ -31,6 +31,8 @@ namespace OpenSSL
 
         public abstract string Arguments { get; }
 
+        public virtual string CommandLine => $"openssl {Arguments}";
+
         public abstract string OutputFile { get; }
 
         public abstract string Description { get; }
@@ -44,7 +46,7 @@ namespace OpenSSL
             Parameters("sha256|blake2b512|blake2s256|gost|md4|md5|mdc2|rmd160|sha1|sha224|sha3-224|sha3-256|sha3-384|sha3-512|sha384|sha512|sha512-224|sha512-256|shake128|shake256|sm3");
 
 
-        public Task<Result> Execute() => Execute(Arguments, WorkingDirectory);
+        public virtual Task<Result> Execute() => Execute(Arguments, WorkingDirectory);
 
         public static Task<Result> Execute(string arguments, string directory)
         {
