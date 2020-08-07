@@ -15,7 +15,6 @@
       A simple GUI to help you with common certificate related tasks
     </summary>
     <description>
-      The openssl program is a command line tool for using the various cryptography functions of OpenSSL's crypto library from the shell.
       OpenSSL Wizard is a small gui layer on top of the openssl cli, which allows you to:
       * Generate an RSA key
       * Generate an Elliptic Curve DSA key
@@ -26,10 +25,11 @@
       * Sign a CSR with your private key
       * Convert certificates from various container formats to one another
       * Combine a private key and a public key into a single container
-	  * Combine a private key and a public key into a single container
+	  * Generate code to hard-code a certificate for testing
+	  
     </description>
     <dependencies>
-      <dependency id="openssl" version=" 1.1.1" />
+      <dependency id="openssl" version="1.1.1" />
     </dependencies>    
   </metadata>
   <files>

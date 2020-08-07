@@ -8,8 +8,8 @@ VERIFICATION
 ------------
 
 openssl-wizard.exe in the package is from:
-https://github.com/deviousasti/openssl-wizard/releases/download/v1.1/openssl-wizard.exe
+https://github.com/deviousasti/openssl-wizard/releases/download/v1.3/openssl-wizard.exe
 
 To verify, use:
-Invoke-WebRequest https://github.com/deviousasti/openssl-wizard/releases/download/v1.1/openssl-wizard.exe -OutFile .\openssl-wizard.temp
+Invoke-WebRequest https://github.com/deviousasti/openssl-wizard/releases/download/v1.3/openssl-wizard.exe -OutFile .\openssl-wizard.temp
 ${Get-FileHash .\openssl-wizard.temp} -eq ${Get-FileHash .\openssl-wizard.exe }
